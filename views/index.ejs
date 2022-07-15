@@ -11,6 +11,7 @@
     <!-- external CSS link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="/style.css">
 
     <!-- Fonts & Icons -->
@@ -52,17 +53,31 @@
                     <% for (let i=0; i < info.length; i++) {%>
                         <div class="col-md-6 col-lg-3">
                             <div class="card bg-light">
+                                <img src="<%= info[i].screenshot %>" class="card-img-top" alt="...">
                                 <div class="card-body text-center">
-                                    <img src="https://randomuser.me/api/portraits/men/11.jpg"
-                                        class="rounded-circle mb-3" alt="">
-                                    <h3 class="card-title mb-3">John Doe</h3>
-                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                        Voluptates
-                                        repellat est debitis? Expedita, iste possimus!</p>
-                                    <a href="#"><i class="bi bi-twitter text-dark mx-1"></i></a>
-                                    <a href="#"><i class="bi bi-facebook text-dark mx-1"></i></a>
-                                    <a href="#"><i class="bi bi-linkedin text-dark mx-1"></i></a>
-                                    <a href="#"><i class="bi bi-instagram text-dark mx-1"></i></a>
+                                    <h5 class="card-title mb-3">Developer: <%= info[i].devName %>
+                                    </h5>
+                                    <p class="card-subtitle mb-2">
+                                        <%= info[i].siteName %>
+                                    </p>
+                                    <p class="card-text text-muted mb-2">Site URL: <a href="<%= info[i].siteUrl %>">
+                                            <%= info[i].siteUrl %>
+                                        </a></p>
+                                    <p class="card-text text-muted mb-2">
+                                        Project Type: <%= info[i].projectType %>
+                                    </p>
+
+                                    <a class="card-link" href="<%= info[i].githubRepo %>">
+                                        <i class="bi bi-github text-dark mx-1"></i></a>
+                                    <a class="card-link" href="<%= info[i].twitter %>">
+                                        <i class="bi bi-twitter text-dark mx-1"></i></a>
+                                </div>
+                                <div class="card-footer text-muted d-flex justify-content-around align-items-center">
+                                    <% for (let j=0; j < info[i].techStack.length; j++) {%>
+                                        <span class="badge bg-primary">
+                                            <%= info[i].techStack[j] %>
+                                        </span>
+                                        <% } %>
                                 </div>
                             </div>
                         </div>
@@ -82,121 +97,150 @@
         </section>
 
         <!-- Add a Project -->
-        <div id="addAProject" class="container-fluid bg-dark text-light pt-3">
-            <!-- Should this be half form half something else? -->
-            <h2 class="text-center text-white mb-3">Add Your Project to the Database</h2>
-            <form>
-                <div class="row mb-3">
-                    <label for="devName" class="col-sm-2 col-form-label">Developer Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="devName">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="siteName" class="col-sm-2 col-form-label">Website Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="siteName">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="siteURL" class="col-sm-2 col-form-label">Website URL</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="siteURL">
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="githubRepo" class="col-sm-2 col-form-label">Github Repo</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="githubRepo">
-                    </div>
-                </div>
-                <!-- Can we update fieldsets to be side by side? -->
-                <fieldset class="row mb-3">
-                    <legend class="col-form-label col-sm-2 pt-0">Tech Stack</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="html" id="html">
-                            <label class="form-check-label" for="html">
-                                HTML
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="css" id="css">
-                            <label class="form-check-label" for="css">
-                                CSS
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="javascript" id="javascript">
-                            <label class="form-check-label" for="javascript">
-                                Javascript
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="express" id="express">
-                            <label class="form-check-label" for="express">
-                                Express
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="mongodb" id="mongodb">
-                            <label class="form-check-label" for="mongodb">
-                                MongoDB
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="nodejs" id="nodejs">
-                            <label class="form-check-label" for="nodejs">
-                                NodeJS
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="react" id="react">
-                            <label class="form-check-label" for="react">
-                                React
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="bootstrap" id="bootstrap">
-                            <label class="form-check-label" for="bootstrap">
-                                Bootstrap
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
-                <fieldset class="row mb-3">
-                    <legend class="col-form-label col-sm-2 pt-0">Project Type</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="staticSite" id="staticSite">
-                            <label class="form-check-label" for="staticSite">
-                                Static Site
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="fullStackApp" id="fullStackApp">
-                            <label class="form-check-label" for="fullStackApp">
-                                Fullstack App
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="100HoursProject" id="100HoursProject">
-                            <label class="form-check-label" for="100HoursProject">
-                                100 Hours Project
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="justForFun" id="justForFun">
-                            <label class="form-check-label" for="justForFun">
-                                Just for Fun
-                            </label>
-                        </div>
-                    </div>
-                </fieldset>
+        <section class="bg-dark text-light p-5 p-lg-0 pt-lg-5 text-center text-sm-start">
+            <div class="container">
+                <div class="d-sm-flex align-items-center justify-content-between">
+                    <div id="addAProject" class="container-fluid bg-dark text-light pt-3">
+                        <h2 class="text-center text-white mb-3">Add Your Project to the Database</h2>
+                        <form>
+                            <div class="row mb-3">
+                                <label for="devName" class="col-sm-2 col-form-label">Developer Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="devName">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="siteName" class="col-sm-2 col-form-label">Website Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="siteName">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="siteURL" class="col-sm-2 col-form-label">Website URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="siteURL">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="screenshot" class="col-sm-2 col-form-label">Screenshot URL</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="screenshot">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="githubRepo" class="col-sm-2 col-form-label">Github Repo</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="githubRepo">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="twitter" class="col-sm-2 col-form-label">Twitter Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="twitter">
+                                </div>
+                            </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
+                            <div class="container d-flex justify-content-evenly">
+                                <fieldset class="row mb-3">
+                                    <legend class="col-form-label col-sm-4 p-1 m-1">Tech Stack</legend>
+                                    <div class="col-sm-7">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="html" id="html">
+                                            <label class="form-check-label" for="html">
+                                                HTML
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="css" id="css">
+                                            <label class="form-check-label" for="css">
+                                                CSS
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="javascript"
+                                                id="javascript">
+                                            <label class="form-check-label" for="javascript">
+                                                Javascript
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="express"
+                                                id="express">
+                                            <label class="form-check-label" for="express">
+                                                Express
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="mongodb"
+                                                id="mongodb">
+                                            <label class="form-check-label" for="mongodb">
+                                                MongoDB
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="nodejs" id="nodejs">
+                                            <label class="form-check-label" for="nodejs">
+                                                NodeJS
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="react" id="react">
+                                            <label class="form-check-label" for="react">
+                                                React
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="bootstrap"
+                                                id="bootstrap">
+                                            <label class="form-check-label" for="bootstrap">
+                                                Bootstrap
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="row mb-3">
+                                    <legend class="col-form-label col-sm-4 p-1 m-1">Project Type</legend>
+                                    <div class="col-sm-7">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="staticSite"
+                                                id="staticSite">
+                                            <label class="form-check-label" for="staticSite">
+                                                Static Site
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="fullStackApp"
+                                                id="fullStackApp">
+                                            <label class="form-check-label" for="fullStackApp">
+                                                Fullstack App
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="100HoursProject"
+                                                id="100HoursProject">
+                                            <label class="form-check-label" for="100HoursProject">
+                                                100 Hours Project
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="justForFun"
+                                                id="justForFun">
+                                            <label class="form-check-label" for="justForFun">
+                                                Just for Fun
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer -->

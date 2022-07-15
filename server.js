@@ -13,7 +13,7 @@ MongoClient.connect(dbConnectionString)
     .then(client => {
         console.log('Connected to Database')
         db = client.db(dbName)
-        collection = db.collection('projects')
+        collection = db.collection('projects-db')
     })
 
 // Middleware comes before CRUD operations
@@ -24,11 +24,14 @@ app.use(express.json())
 app.use(cors())
 
 app.get('/', (request, response) => {
-    db.collection('characters-and-players').find().toArray()
+    db.collection('projects-db').find().toArray()
         .then(data => {
             response.render('index.ejs', { info: data })
         })
+        .catch(error => console.error(error))
 })
+
+
 
 
 app.listen(process.env.PORT || PORT, () => {
