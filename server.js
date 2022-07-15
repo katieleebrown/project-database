@@ -6,8 +6,7 @@ require('dotenv').config()
 
 let db,
     dbConnectionString = process.env.DB_STRING,
-    dbName = 'projects',
-    collection
+    dbName = 'projects'
 
 MongoClient.connect(dbConnectionString)
     .then(client => {
@@ -32,15 +31,6 @@ app.get('/', (request, response) => {
 })
 
 app.post('/addProject', (request, response) => {
-    // Create array for selected tech stack
-    // let techStackArr = []
-    // let checkboxes = request.body.checkbox('input[type=checkbox]:checked')
-
-    // for (let i = 0; i < checkboxes.length; i++) {
-    //     techStackArr.push(checkboxes[i].value)
-    // }
-
-    // Push items to collection
     db.collection('projects-db').insertOne({ devName: request.body.devName, siteName: request.body.siteName, siteUrl: request.body.siteURL, screenshot: request.body.screenshot, githubRepo: request.body.githubRepo, twitter: request.body.twitter, techStack: request.body.techStack, projectType: request.body.projectType })
         .then(result => {
             console.log('Project Added')
