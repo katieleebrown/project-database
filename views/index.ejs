@@ -31,9 +31,10 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">See Projects</a>
+                        <a class="nav-link" href="#seeProjects">See Projects</a>
                         <a class="nav-link" href="#addAProject">Add a Project</a>
-                        <a class="nav-link" href="https://github.com/katieleebrown/project-database">Github</a>
+                        <a class="nav-link" href="https://github.com/katieleebrown/project-database"
+                            target="_blank">Github</a>
                     </div>
                 </div>
             </div>
@@ -51,9 +52,13 @@
                 <div class="row g-4">
                     <!-- Holds all project cards -->
                     <% for (let i=0; i < info.length; i++) {%>
-                        <div class="col-md-6 col-lg-3">
+                        <div class="col-md-6 col-lg-3 card-group">
                             <div class="card bg-light">
-                                <img src="<%= info[i].screenshot %>" class="card-img-top" alt="...">
+                                <img src="<% if (info[i].screenshot != '') { %>
+                                    <%= info[i].screenshot %>
+                                <% } else { %>
+                                    http://placekitten.com/300/200
+                                <% } %>" class="card-img-top" alt="...">
                                 <div class="card-body text-center">
                                     <h5 class="card-title mb-3">Developer: <%= info[i].devName %>
                                     </h5>
@@ -72,9 +77,10 @@
                                     <a class="card-link" href="<%= info[i].twitter %>">
                                         <i class="bi bi-twitter text-dark mx-1"></i></a>
                                 </div>
-                                <div class="card-footer text-muted d-flex justify-content-around align-items-center">
+                                <div
+                                    class="card-footer text-muted d-flex flex-wrap justify-content-around align-items-center">
                                     <% for (let j=0; j < info[i].techStack.length; j++) {%>
-                                        <span class="badge bg-primary">
+                                        <span class="badge bg-primary m-1">
                                             <%= info[i].techStack[j] %>
                                         </span>
                                         <% } %>
@@ -112,41 +118,44 @@
                 <div class="d-sm-flex align-items-center justify-content-between">
                     <div id="addAProject" class="container-fluid bg-dark text-light pt-3">
                         <h2 class="text-center text-white mb-3">Add Your Project to the Database</h2>
-                        <form>
+                        <form action="/addProject" method="POST">
                             <div class="row mb-3">
                                 <label for="devName" class="col-sm-2 col-form-label">Developer Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="devName">
+                                    <input type="text" class="form-control" id="devName" name="devName">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="siteName" class="col-sm-2 col-form-label">Website Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="siteName">
+                                    <input type="text" class="form-control" id="siteName" name="siteName">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="siteURL" class="col-sm-2 col-form-label">Website URL</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="siteURL">
+                                    <input type="text" class="form-control" id="siteURL" name="siteURL">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="screenshot" class="col-sm-2 col-form-label">Screenshot URL</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="screenshot">
+                                    <input type="text" class="form-control" id="screenshot" name="screenshot">
+                                    <span class="text-muted mb-0">Don't have a screenshot? We'll generate a random cat
+                                        if you
+                                        leave this blank</span>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label for="githubRepo" class="col-sm-2 col-form-label">Github Repo</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="githubRepo">
+                                    <input type="text" class="form-control" id="githubRepo" name="githubRepo">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label for="twitter" class="col-sm-2 col-form-label">Twitter Name</label>
+                                <label for="twitter" class="col-sm-2 col-form-label">Twitter URL</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="twitter">
+                                    <input type="text" class="form-control" id="twitter" name="twitter">
                                 </div>
                             </div>
 
@@ -155,53 +164,57 @@
                                     <legend class="col-form-label col-sm-4 p-1 m-1">Tech Stack</legend>
                                     <div class="col-sm-7">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="html" id="html">
+                                            <input class="form-check-input" type="checkbox" value="HTML" id="html"
+                                                name="techStack">
                                             <label class="form-check-label" for="html">
                                                 HTML
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="css" id="css">
+                                            <input class="form-check-input" type="checkbox" value="CSS" id="css"
+                                                name="techStack">
                                             <label class="form-check-label" for="css">
                                                 CSS
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="javascript"
-                                                id="javascript">
+                                            <input class="form-check-input" type="checkbox" value="Javascript"
+                                                id="javascript" name="techStack">
                                             <label class="form-check-label" for="javascript">
                                                 Javascript
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="express"
-                                                id="express">
+                                            <input class="form-check-input" type="checkbox" value="Express" id="express"
+                                                name="techStack">
                                             <label class="form-check-label" for="express">
                                                 Express
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="mongodb"
-                                                id="mongodb">
+                                            <input class="form-check-input" type="checkbox" value="MongoDB" id="mongodb"
+                                                name="techStack">
                                             <label class="form-check-label" for="mongodb">
                                                 MongoDB
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="nodejs" id="nodejs">
+                                            <input class="form-check-input" type="checkbox" value="Nodejs" id="nodejs"
+                                                name="techStack">
                                             <label class="form-check-label" for="nodejs">
                                                 NodeJS
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="react" id="react">
+                                            <input class="form-check-input" type="checkbox" value="React" id="react"
+                                                name="techStack">
                                             <label class="form-check-label" for="react">
                                                 React
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="bootstrap"
-                                                id="bootstrap">
+                                            <input class="form-check-input" type="checkbox" value="Bootstrap"
+                                                id="bootstrap" name="techStack">
                                             <label class="form-check-label" for="bootstrap">
                                                 Bootstrap
                                             </label>
@@ -212,29 +225,29 @@
                                     <legend class="col-form-label col-sm-4 p-1 m-1">Project Type</legend>
                                     <div class="col-sm-7">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="staticSite"
-                                                id="staticSite">
+                                            <input class="form-check-input" type="radio" value="Static Site"
+                                                name="projectType" id="staticSite">
                                             <label class="form-check-label" for="staticSite">
                                                 Static Site
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="fullStackApp"
-                                                id="fullStackApp">
+                                            <input class="form-check-input" type="radio" value="Fullstack App"
+                                                name="projectType" id="fullStackApp">
                                             <label class="form-check-label" for="fullStackApp">
                                                 Fullstack App
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="100HoursProject"
-                                                id="100HoursProject">
+                                            <input class="form-check-input" type="radio" name="projectType"
+                                                value="100 Hours Project" id="100HoursProject">
                                             <label class="form-check-label" for="100HoursProject">
                                                 100 Hours Project
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="justForFun"
-                                                id="justForFun">
+                                            <input class="form-check-input" type="radio" name="projectType"
+                                                value="Just For Fun" id="justForFun">
                                             <label class="form-check-label" for="justForFun">
                                                 Just for Fun
                                             </label>
@@ -242,7 +255,6 @@
                                     </div>
                                 </fieldset>
                             </div>
-
 
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

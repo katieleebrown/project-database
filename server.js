@@ -31,7 +31,23 @@ app.get('/', (request, response) => {
         .catch(error => console.error(error))
 })
 
+app.post('/addProject', (request, response) => {
+    // Create array for selected tech stack
+    // let techStackArr = []
+    // let checkboxes = request.body.checkbox('input[type=checkbox]:checked')
 
+    // for (let i = 0; i < checkboxes.length; i++) {
+    //     techStackArr.push(checkboxes[i].value)
+    // }
+
+    // Push items to collection
+    db.collection('projects-db').insertOne({ devName: request.body.devName, siteName: request.body.siteName, siteUrl: request.body.siteURL, screenshot: request.body.screenshot, githubRepo: request.body.githubRepo, twitter: request.body.twitter, techStack: request.body.techStack, projectType: request.body.projectType })
+        .then(result => {
+            console.log('Project Added')
+            response.redirect('/')
+        })
+        .catch(error => console.error(error))
+})
 
 
 app.listen(process.env.PORT || PORT, () => {
